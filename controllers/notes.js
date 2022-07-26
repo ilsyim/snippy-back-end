@@ -16,23 +16,45 @@ function addNote(req, res) {
   })
 }
 
-// function show(req, res) {
-//   Note.findById(req.params.id)
-//   .then(note => {
-//     res.json(note)
-//   })
-//   .catch(err => {
-//     console.log(err)
-//     res.status(500).json({err: err.errmsg})
-//   })
-// }
+function show(req, res) {
+  Note.find({})
+  .populate('owner')
+  .then(note => {
+    res.json(note)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  })
+}
 
+function deleteOne(req, res) {
+  Note.findByIdAndDelete(req.params.id)
+  .then(deletedNote => {
+    res.json(deletedNote)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  })
+}
 
-
-
+function update(req, res) {
+  Note.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .populate('owner')
+  .then(updatedNote => {
+    res.json(updatedNote)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  })
+}
 
 
 export {
   addNote,
-  // show
+  show,
+  deleteOne as delete,
+  update
 }
