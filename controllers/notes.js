@@ -39,11 +39,22 @@ function deleteOne(req, res) {
   })
 }
 
-
+function update(req, res) {
+  Note.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .populate('owner')
+  .then(updatedNote => {
+    res.json(updatedNote)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  })
+}
 
 
 export {
   addNote,
   show,
   deleteOne as delete,
+  update
 }

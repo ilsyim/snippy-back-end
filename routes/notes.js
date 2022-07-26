@@ -15,5 +15,7 @@ router.post('/', checkAuth, notesCtrl.addNote)
 
 router.delete('/:id', checkAuth, notesCtrl.delete)
 
+router.put('/:id', checkAuth, notesCtrl.update)
+
 
 export { router }
