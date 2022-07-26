@@ -5,7 +5,10 @@ function addNote(req, res) {
   Note.create(req.body)
   .then(note => {
     Note.findById(note._id)
-    res.json(newNote)
+    .populate('owner')
+    .then(newNote => {
+      res.json(newNote)
+    })
   })
   .catch(err => {
     console.log(err)
@@ -13,7 +16,16 @@ function addNote(req, res) {
   })
 }
 
-
+// function show(req, res) {
+//   Note.findById(req.params.id)
+//   .then(note => {
+//     res.json(note)
+//   })
+//   .catch(err => {
+//     console.log(err)
+//     res.status(500).json({err: err.errmsg})
+//   })
+// }
 
 
 
@@ -22,4 +34,5 @@ function addNote(req, res) {
 
 export {
   addNote,
+  // show
 }
