@@ -6,7 +6,7 @@ const profileSchema = new mongoose.Schema({
   email: { type: String, required: true, lowercase: true, unique: true },
   name: String,
   photo: { type: String },
-  notes: [{type: Schema.Types.ObjectId, ref: "Note"}]
+  // notes: [{type: Schema.Types.ObjectId, ref: "Note"}]
 },{
   timestamps: true,
 })

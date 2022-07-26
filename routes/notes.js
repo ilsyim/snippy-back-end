@@ -9,8 +9,11 @@ const router = Router()
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
+router.get('/', checkAuth, notesCtrl.show)
 
 router.post('/', checkAuth, notesCtrl.addNote)
+
+router.delete('/:id', checkAuth, notesCtrl.delete)
 
 
 export { router }
